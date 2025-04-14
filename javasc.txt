@@ -1,0 +1,46 @@
+const providers = [
+  { name: "GreenWatt", pricePerKWh: 0.10, type: "Solar" },
+  { name: "EcoSpark", pricePerKWh: 0.09, type: "Wind" },
+  { name: "BrightFuture", pricePerKWh: 0.12, type: "Hydro" },
+];
+
+const currentPrice = 0.15;
+let selectedProvider = null;
+
+const providerList = document.getElementById("providerList");
+const usageInput = document.getElementById("usageInput");
+const calculateBtn = document.getElementById("calculateBtn");
+const savingsResult = document.getElementById("savingsResult");
+
+providers.forEach((provider, index) => {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `
+    <h3>${provider.name}</h3>
+    <p>Type: ${provider.type}</p>
+    <p>Price: $${provider.pricePerKWh.toFixed(2)}/kWh</p>
+  `;
+  card.addEventListener("click", () => {
+    selectedProvider = provider;
+    updateSelection(index);
+    calculateBtn.disabled = false;
+  });
+  providerList.appendChild(card);
+});
+
+function updateSelection(selectedIndex) {
+  const cards = providerList.querySelectorAll(".card");
+  cards.forEach((card, i) => {
+    card.classList.toggle("selected", i === selectedIndex);
+  });
+}
+
+calculateBtn.addEventListener("click", () => {
+  const usage = parseFloat(usageInput.value);
+  if (selectedProvider && usage > 0) {
+    const currentCost = usage * currentPrice;
+    const newCost = usage * selectedProvider.pricePerKWh;
+    const savings = currentCost - newCost;
+    savingsResult.textContent = Estimated Monthly Savings: $${savings.toFixed(2)};
+  }
+});

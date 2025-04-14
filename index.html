@@ -1,0 +1,28 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Affordable & Clean Energy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Affordable & Clean Energy</h1>
+
+    <section>
+      <h2>Energy Providers</h2>
+      <div id="providerList" class="grid"></div>
+    </section>
+
+    <section>
+      <h2>Savings Calculator</h2>
+      <div class="calculator">
+        <input type="number" id="usageInput" placeholder="Monthly kWh usage" value="500" min="0" />
+        <button id="calculateBtn" disabled>Calculate Savings</button>
+      </div>
+      <p id="savingsResult" class="result"></p>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
